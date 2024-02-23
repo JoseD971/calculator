@@ -3,3 +3,68 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.container {
+    padding: 50px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen {
+    height: 30px;
+    width: 100%;
+    background-color: #dbd9d3;
+}
+
+.keyboard {
+    display: flex;
+}
+
+.principal {
+    width: 75%;
+}
+
+.lateral {
+    width: 25%;
+}
+
+.number-buttons,
+.control-buttons,
+.operation-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.number-buttons {
+    flex-direction: row-reverse;
+}
+
+.operation-buttons {
+    flex-direction: column;
+    justify-content: start;
+}
+
+.operation-buttons > * {
+    flex-basis: 100%;
+    flex-grow: 1;
+}
+
+.control-buttons > * {
+    flex-basis: 25%;
+    flex-grow: 1;
+}
+
+.operand {
+    flex-basis: 33%;
+    flex-grow: 1;
+}
+button[value="0"] {
+    flex-basis: 50%;
+}
+
+button[value="."] {
+    flex-basis: 25%;
+}
