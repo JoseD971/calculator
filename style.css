@@ -14,9 +14,9 @@
     align-items: center;
 }
 
-.calculator {
+#calculator {
     width: 400px;
-    border: 5px solid rgba(47,47,47,1);;
+    border: 5px solid rgba(47,47,47,1);
     border-radius: 15px;
     padding-top: 50px;
     padding-bottom: 10px;
@@ -27,14 +27,20 @@
 #screen {
     height: 100px;
     width: 100%;
+    overflow: hidden;
+    overflow-anchor: auto !important;
     padding: 5px;
     min-width: 300px;
     background-color: #98b38f;
     margin-bottom: 10px;
+    /* text-align: end;
+    vertical-align: middle; */
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
     align-items: center;
     font-size: 80px;
+    cursor: grab;
 }
 
 .keyboard {

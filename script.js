@@ -43,10 +43,8 @@ backspace.addEventListener('click', function() {backspaceInput(); display()});
 decimal.addEventListener('click', decimalInput);
 
 function setOperator(e) {
-    if (total == null) {
-        total = firstOperand;
-    }
-    if (secondOperand != null) calculate(); 
+    if (total == null) total = firstOperand;
+    if (secondOperand != 0) calculate();
     secondOperand = 0;
     var operation = e.target.id;
 
@@ -145,11 +143,14 @@ function division () {
 };
 
 function display() {
-    console.log("Total: " + total + " Operator: " + operatorValue + " Current: " + current + " 1Operando: " + firstOperand + " 2Operando: " + secondOperand);
-    screen.innerText = screenValue;
-    if(screenValue.toString().length > 7) {
-        screen.innerText = screenValue.toString().substring(0, 7);
+    //console.log("Total: " + total + " Operator: " + operatorValue + " Current: " + current + " FirstOperand: " + firstOperand + " SecondOperand: " + secondOperand);
+    if (screenValue.toString().length > 5 && screenValue % 1 != 0) {
+        screenValue = screenValue.toFixed(5);;
     }
+    screen.innerText = screenValue;
+    // if(screenValue.toString().length > 7) {
+    //     screen.innerText = screenValue.toString().substring(0, 7);
+    // }
 }
 
 function changeSign () {
@@ -200,3 +201,34 @@ function decimalInput() {
     }
     display();
 }
+
+// -------------------- DRAG SCREEN FUNCIONALITY --------------------
+let mouseDown = false;
+let startX, scrollLeft;
+const slider = document.querySelector('#screen');
+
+const startDragging = (e) => {
+  mouseDown = true;
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+  slider.style.cursor = "grab";
+}
+
+const stopDragging = (e) => {
+  mouseDown = false;
+  slider.style.cursor = "grab";
+}
+
+const move = (e) => {
+  e.preventDefault();
+  if(!mouseDown) { return; }
+  const x = e.pageX - slider.offsetLeft;
+  const scroll = x - startX;
+  slider.scrollLeft = scrollLeft - scroll;
+  slider.style.cursor = "grabbing";
+}
+
+slider.addEventListener('mousemove', move, false);
+slider.addEventListener('mousedown', startDragging, false);
+slider.addEventListener('mouseup', stopDragging, false);
+slider.addEventListener('mouseleave', stopDragging, false);
